@@ -3,15 +3,17 @@ import './App.css';
 import React, {useEffect, useState} from "react"
 
 function App() {
-  const [message, setMessage] = useState("")
+  const [memos, setMemos] = useState([])
   useEffect(()=>{
-    fetch("http://localhost:8000/message")
+    fetch("http://localhost:8000/api/v1/memos")
       .then((res)=> res.json())
-      .then((data)=> setMessage(data.msg))
+      .then((data)=> setMemos(data.allMemos))
+      console.log(memos)
 }, [])
   return (
     <div className="App">
-      <h1>{message}</h1>
+      <h1>{memos[0].title}</h1>
+      <h3>{memos[0].memocontent}</h3>
     </div>
   );
 }
